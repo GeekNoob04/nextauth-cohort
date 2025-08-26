@@ -54,4 +54,7 @@ export const NEXT_AUTH = {
             return session;
         },
     },
+    pages: {
+        signIn: "/signin",
+    }, 
 };
