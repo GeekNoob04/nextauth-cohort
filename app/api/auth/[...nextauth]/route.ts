@@ -1,51 +1,6 @@
+import { NEXT_AUTH } from "@/app/lib/auth";
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
-const handler = NextAuth({
-    providers: [
-        CredentialsProvider({
-            name: "Email",
-            credentials: {
-                username: {
-                    label: "username",
-                    type: "text",
-                    placeholder: "email",
-                },
-                password: {
-                    label: "password",
-                    type: "password",
-                    placeholder: "password",
-                },
-            },
-            async authorize(credentials: any) {
-                console.log(credentials);
-                return {
-                    id: "user 1",
-                    name: "Harshit Budhraja",
-                    email: "harshitbudhraja0@gmail.com",
-                };
-            },
-        }),
-    ],
-    secret: process.env.NEXTAUTH_SECRET,
-    callbacks: {
-        signIn: ({ user }) => {
-            if (user.email == "harshitbok45@gmail.com") {
-                return false;
-            }
-            return true;
-        },
-        jwt: ({ token, user }) => {
-            console.log(token);
-            return token;
-        },
-        session: ({ session, token, user }) => {
-            if (session && session.user) {
-                session.user.id = token.sub;
-                return session;
-            }
-        },
-    },
-});
+const handler = NextAuth(NEXT_AUTH);
 export const GET = handler;
 export const POST = handler;
 // import { NextRequest, NextResponse } from "next/server";
