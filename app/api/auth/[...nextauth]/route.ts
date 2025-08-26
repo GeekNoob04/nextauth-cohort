@@ -17,12 +17,16 @@ const handler = NextAuth({
                 },
             },
             async authorize(credentials: any) {
+                console.log(credentials);
                 return {
                     id: "user 1",
+                    name: "Harshit Budhraja",
+                    email: "harshitbudhraja0@gmail.com",
                 };
             },
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
 });
 export const GET = handler;
 export const POST = handler;

@@ -1,8 +1,9 @@
 "use client";
 
-import { signIn, signOut } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export const Appbar = () => {
+    const session = useSession();
     return (
         <div className="p-4 m-4 text-stone-200 flex justify-center items-center">
             <button
@@ -21,6 +22,7 @@ export const Appbar = () => {
             >
                 Logout
             </button>
+            {JSON.stringify(session)}
         </div>
     );
 };
