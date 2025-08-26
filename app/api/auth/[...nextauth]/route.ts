@@ -27,6 +27,24 @@ const handler = NextAuth({
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
+    callbacks: {
+        signIn: ({ user }) => {
+            if (user.email == "harshitbok45@gmail.com") {
+                return false;
+            }
+            return true;
+        },
+        jwt: ({ token, user }) => {
+            console.log(token);
+            return token;
+        },
+        session: ({ session, token, user }) => {
+            if (session && session.user) {
+                session.user.id = token.sub;
+                return session;
+            }
+        },
+    },
 });
 export const GET = handler;
 export const POST = handler;
